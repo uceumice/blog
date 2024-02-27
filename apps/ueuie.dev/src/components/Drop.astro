@@ -1,0 +1,195 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import Button from '~/components/atoms/Button.astro';
+
+type Props = {
+    style?: Exclude<HTMLAttributes<'div'>['style'], string>;
+};
+
+const { style } = Astro.props;
+
+const id = Math.random().toString(36).substring(2, 15);
+---
+
+<style lang="scss">
+    [popover] {
+        inset: unset;
+        padding: 0;
+        border: 0;
+        margin: 0;
+    }
+
+    .trigger {
+        position: fixed;
+        right: 1.5rem;
+        bottom: 1.5rem;
+        z-index: 10;
+    }
+
+    .popover {
+        right: 1rem;
+        bottom: 1rem;
+
+        &::backdrop {
+            background-color: lch(0% 0 360);
+            opacity: 0.5;
+        }
+    }
+
+    .container {
+        padding: 0.5rem;
+
+        gap: 1rem;
+        display: flex;
+        justify-content: space-between;
+
+        background-color: #000;
+
+        z-index: 10;
+    }
+
+    @supports (-webkit-backdrop-filter: blur(2px)) or
+        (backdrop-filter: blur(2px)) {
+        /* Styles for browsers that support backdrop-filter */
+        /* Use the non-prefixed property when supported, or the -webkit- version as a fallback */
+        .popover::backdrop {
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+    }
+</style>
+
+<style lang="scss">
+    .interface-language {
+    }
+
+    .color-scheme {
+    }
+
+    .animation {
+    }
+</style>
+
+<Button
+    class="trigger"
+    popovertarget={id}
+    style={{ position: 'fixed', right: '1.5rem', bottom: '1.5rem', ...style }}
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        viewBox="0 0 16 16"
+        fill="none"
+    >
+        <path
+            fill-rule="evenodd"
+            clip-rule="evenodd"
+            d="M7.99995 1.6001C4.79995 4.53343 3.19995 6.93343 3.19995 9.6001C3.19995 12.2511 5.34899 14.4001 7.99995 14.4001C10.6509 14.4001 12.8 12.2511 12.8 9.6001C12.8 6.93343 11.2 4.53343 7.99995 1.6001ZM11.7333 9.6001C11.7333 7.58626 10.638 5.62351 7.99995 3.06524C5.36194 5.62351 4.26662 7.58626 4.26662 9.6001C4.26662 11.662 5.93808 13.3334 7.99995 13.3334C10.0618 13.3334 11.7333 11.662 11.7333 9.6001Z"
+            fill="white"></path>
+        <path
+            d="M11.7333 9.6001C11.7333 7.58626 10.638 5.62351 7.99995 3.06524C5.36194 5.62351 4.26662 7.58626 4.26662 9.6001C4.26662 11.662 5.93808 13.3334 7.99995 13.3334C10.0618 13.3334 11.7333 11.662 11.7333 9.6001Z"
+            fill="white"></path>
+    </svg>
+</Button>
+<div id={id} class="popover" popover="auto">
+    <div dir="rtl" class="container">
+        <Button popovertarget={id}>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 15 15"
+            >
+                <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M12.854 2.854a.5.5 0 0 0-.708-.708L7.5 6.793L2.854 2.146a.5.5 0 1 0-.708.708L6.793 7.5l-4.647 4.646a.5.5 0 0 0 .708.708L7.5 8.207l4.646 4.647a.5.5 0 0 0 .708-.708L8.207 7.5l4.647-4.646Z"
+                    cli-rule="evenodd"></path>
+            </svg>
+        </Button>
+
+        <Button
+            class="interface-language"
+            tooltip="Sprache und Lokale (Deutsch - Deutschaland)"
+        >
+            <span
+                style={{
+                    fontFamily: 'monospace',
+                    width: '1rem',
+                    height: '1rem',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                }}
+            >
+                DEU
+            </span>
+        </Button>
+        <Button class="color-scheme" tooltip="Farbpalette (Dunkel)">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 15 15"
+            >
+                <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M2.9.5a.4.4 0 0 0-.8 0v.6h-.6a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 1 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6V.5Zm3 3a.4.4 0 1 0-.8 0v.6h-.6a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 1 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6v-.6Zm-4 3a.4.4 0 1 0-.8 0v.6H.5a.4.4 0 1 0 0 .8h.6v.6a.4.4 0 0 0 .8 0v-.6h.6a.4.4 0 0 0 0-.8h-.6v-.6ZM8.544.982l-.298-.04c-.213-.024-.34.224-.217.4A6.57 6.57 0 0 1 9.203 5.1a6.602 6.602 0 0 1-6.243 6.59c-.214.012-.333.264-.183.417a6.8 6.8 0 0 0 .21.206l.072.066l.26.226l.188.148l.121.09l.187.131l.176.115c.12.076.244.149.37.217l.264.135l.26.12l.303.122l.244.086a6.568 6.568 0 0 0 1.103.26l.317.04l.267.02a6.6 6.6 0 0 0 6.943-7.328l-.037-.277a6.557 6.557 0 0 0-.384-1.415l-.113-.268l-.077-.166l-.074-.148a6.602 6.602 0 0 0-.546-.883l-.153-.2l-.199-.24l-.163-.18l-.12-.124l-.16-.158l-.223-.2l-.32-.26l-.245-.177l-.292-.19l-.321-.186l-.328-.165l-.113-.052l-.24-.101l-.276-.104l-.252-.082l-.325-.09l-.265-.06l-.292-.053Zm1.86 4.318a7.578 7.578 0 0 0-.572-2.894a5.601 5.601 0 1 1-4.748 10.146a7.61 7.61 0 0 0 3.66-2.51a.749.749 0 0 0 1.355-.442a.75.75 0 0 0-.584-.732c.062-.116.122-.235.178-.355A1.25 1.25 0 1 0 10.35 6.2c.034-.295.052-.595.052-.9Z"
+                    clip-rule="evenodd"
+                >
+                </path>
+            </svg>
+
+            <!-- <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 15 15"
+            >
+                <path
+                    fill="currentColor"
+                    fill-rule="evenodd"
+                    d="M7.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-1 0v-2a.5.5 0 0 1 .5-.5ZM2.197 2.197a.5.5 0 0 1 .707 0L4.318 3.61a.5.5 0 0 1-.707.707L2.197 2.904a.5.5 0 0 1 0-.707ZM.5 7a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Zm1.697 5.803a.5.5 0 0 1 0-.707l1.414-1.414a.5.5 0 1 1 .707.707l-1.414 1.414a.5.5 0 0 1-.707 0ZM12.5 7a.5.5 0 0 0 0 1h2a.5.5 0 0 0 0-1h-2Zm-1.818-2.682a.5.5 0 0 1 0-.707l1.414-1.414a.5.5 0 1 1 .707.707L11.39 4.318a.5.5 0 0 1-.707 0ZM8 12.5a.5.5 0 0 0-1 0v2a.5.5 0 0 0 1 0v-2Zm2.682-1.818a.5.5 0 0 1 .707 0l1.414 1.414a.5.5 0 1 1-.707.707l-1.414-1.414a.5.5 0 0 1 0-.707ZM5.5 7.5a2 2 0 1 1 4 0a2 2 0 0 1-4 0Zm2-3a3 3 0 1 0 0 6a3 3 0 0 0 0-6Z"
+                    clip-rule="evenodd"
+                >
+                </path>
+            </svg> -->
+        </Button>
+
+        <Button class="animation" tooltip="Animationsmodus (Animiert)">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="1em"
+                height="1em"
+                viewBox="0 0 15 15"
+                ><g fill="currentColor" fill-rule="evenodd" clip-rule="evenodd"
+                    ><path
+                        d="M12.162 3.852c-3.804 1.037-7.273 4.506-8.31 8.31l-.482-.132c1.084-3.974 4.686-7.577 8.66-8.66l.132.482Z"
+                        opacity=".05"></path><path
+                        d="M11.88 3.427C8.035 4.505 4.507 8.034 3.428 11.88l-.481-.134c1.125-4.015 4.785-7.675 8.8-8.8l.135.481Z"
+                        opacity=".1"></path><path
+                        d="M11.52 3.026c-3.83 1.136-7.352 4.657-8.492 8.486l-.48-.143c1.189-3.99 4.839-7.638 8.83-8.823l.142.48Z"
+                        opacity=".15"></path><path
+                        d="M11.047 2.662C7.31 3.877 3.879 7.308 2.663 11.043l-.475-.154C3.453 7 7.004 3.45 10.892 2.186l.155.476Z"
+                        opacity=".2"></path><path
+                        d="M10.52 2.324c-3.6 1.29-6.896 4.585-8.192 8.183l-.47-.169c1.346-3.739 4.754-7.144 8.493-8.485l.17.47Z"
+                        opacity=".25"></path><path
+                        d="M9.902 2.031C6.5 3.395 3.4 6.494 2.034 9.896l-.464-.187c1.417-3.528 4.617-6.728 8.146-8.142l.186.464Z"
+                        opacity=".3"></path><path
+                        d="M9.207 1.789C6.061 3.203 3.211 6.052 1.793 9.197l-.456-.205c1.468-3.257 4.408-6.194 7.665-7.66l.205.457Z"
+                        opacity=".35"></path><path
+                        d="M8.407 1.62c-2.814 1.431-5.35 3.965-6.782 6.778l-.445-.226c1.48-2.908 4.092-5.519 7-6.997l.227.446Z"
+                        opacity=".4"></path><path
+                        d="M7.462 1.567c-2.375 1.38-4.508 3.512-5.89 5.887l-.432-.252c1.425-2.45 3.62-4.644 6.071-6.067l.251.432Z"
+                        opacity=".45"></path><path
+                        d="M6.304 1.705a17.386 17.386 0 0 0-4.6 4.6l-.414-.28a17.886 17.886 0 0 1 4.734-4.734l.28.414Z"
+                        opacity=".5"></path><path
+                        d="M.877 7.5a6.623 6.623 0 1 1 13.246 0a6.623 6.623 0 0 1-13.246 0ZM7.5 1.827a5.673 5.673 0 1 0 0 11.346a5.673 5.673 0 0 0 0-11.346Z"
+                    ></path></g
+                ></svg
+            >
+        </Button>
+    </div>
+</div>

@@ -1,0 +1,56 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = HTMLAttributes<'button'> & { tooltip?: string; href?: string };
+const { tooltip, ...props } = Astro.props;
+
+export type ButtonProps = Props;
+---
+
+<style>
+    button {
+        all: unset;
+        color: #fff;
+
+        width: 1rem;
+        height: 1rem;
+        cursor: pointer;
+        transition: transform 150ms ease-in-out;
+    }
+
+    button:active {
+        transform: scale(0.9);
+    }
+
+    button {
+        position: relative;
+        display: inline-block;
+    }
+</style>
+
+<style lang="scss">
+    .tooltip-text {
+        visibility: hidden;
+        position: absolute;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity 0.6s;
+    }
+
+    .tooltip-top {
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+    }
+</style>
+
+<button {...props}>
+    {tooltip && <span class="tooltip-text tooltip-top">{tooltip}</span>}
+    <slot />
+</button>

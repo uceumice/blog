@@ -1,0 +1,100 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import type { Lines } from './Logo.anim';
+
+type Props = {
+    teletype?: {
+        lines?: Lines;
+    };
+
+    style?: Exclude<HTMLAttributes<'div'>['style'], string>;
+};
+
+const { teletype, style } = Astro.props;
+import 'normalize.css/normalize.css';
+---
+
+<div
+    class="container"
+    style={{
+        left: '2.5rem',
+        top: '2.5rem',
+        ...style,
+    }}
+>
+    <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="48"
+        height="48"
+        viewBox="0 0 48 48"
+        fill="none"
+        class="icon"
+    >
+        <path
+            d="M47.5 33.8061V47.5H33.8061V33.8061H47.5ZM33.8061 0.5H47.5V14.1939H33.8061V0.5ZM33.8061 24C33.8061 20.2185 36.8716 17.1531 40.6531 17.1531H47.5V30.8469H40.6531C36.8716 30.8469 33.8061 27.7815 33.8061 24ZM17.1531 40.6531C17.1531 36.8716 20.2185 33.8061 24 33.8061C27.7815 33.8061 30.8469 36.8716 30.8469 40.6531V47.5H17.1531V40.6531ZM14.1939 33.8061V47.5H0.5V33.8061H14.1939ZM0.5 17.1531H7.34694C11.1284 17.1531 14.1939 20.2185 14.1939 24C14.1939 27.7815 11.1284 30.8469 7.34694 30.8469H0.5V17.1531ZM0.5 0.5H14.1939V14.1939H0.5V0.5Z"
+            stroke="url(#paint0_linear_15_3)"></path>
+        <defs>
+            <linearGradient
+                id="paint0_linear_15_3"
+                x1="0"
+                y1="0"
+                x2="48"
+                y2="48"
+                gradientUnits="userSpaceOnUse"
+            >
+                <stop stop-color="#CECECE"></stop>
+                <stop offset="1" stop-color="#636363"></stop>
+            </linearGradient>
+        </defs>
+    </svg>
+    <ul id="teletype" class="teletype">
+        {
+            (teletype?.lines
+                ? [
+                      teletype.lines[0] ?? '',
+                      teletype.lines[1] ?? '',
+                      teletype.lines[2] ?? '',
+                  ]
+                : ['', '', '']
+            ).map((line) => <li class="line">{line}</li>)
+        }
+    </ul>
+</div>
+
+<style lang="scss">
+    .container {
+        position: fixed;
+
+        gap: 0.5rem;
+        display: flex;
+        flex-shrink: 0;
+        align-items: flex-start;
+
+        z-index: 10;
+
+        // LogoIcon
+        .icon {
+            width: 3rem;
+            height: 3rem;
+        }
+
+        .teletype {
+            align-self: stretch;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            .line {
+                font-family: monospace;
+                font-size: 0.75rem;
+                font-weight: 200;
+                line-height: normal;
+            }
+        }
+    }
+</style>

@@ -1,0 +1,126 @@
+---
+import type { MarkdownHeading } from 'astro';
+import Basic from '~/components/layouts/Basic.astro';
+import Button from '~/components/atoms/Button.astro';
+import ReaderTools from '~/components/ReaderTools.astro';
+
+type Props = { headings: MarkdownHeading[] };
+
+const { headings } = Astro.props;
+---
+
+<style lang="scss">
+    .container {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .sidebar {
+        width: 15rem;
+    }
+
+    .content {
+        max-width: 40rem;
+        padding: 1rem;
+
+        header {
+            margin-bottom: 1rem;
+        }
+    }
+</style>
+
+<style lang="scss">
+    .table-of-contents {
+        position: fixed;
+        top: 8rem;
+        margin-left: 2rem;
+        max-width: 8rem;
+        overflow: none;
+
+        ul {
+            all: unset;
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            li {
+                all: unset;
+                a {
+                    color: #fff;
+                    text-decoration: none;
+                }
+            }
+        }
+    }
+</style>
+
+<style>
+    .tts {
+        position: relative;
+        right: -2rem;
+        top: 0;
+    }
+</style>
+
+<Basic>
+    <div class="container">
+        <div class="sidebar">
+            <div class="table-of-contents">
+                <ul>
+                    {
+                        headings.map((heading, idx) => (
+                            <li>
+                                <a href={`#${heading.slug}`}>
+                                    {idx + 1 + '. ' + heading.text}
+                                </a>
+                            </li>
+                        ))
+                    }
+                </ul>
+            </div>
+            <ReaderTools />
+        </div>
+        <div class="content">
+            <header>
+                <h1 class="title">
+                    Seamless Integration of Creative Solutions in Established
+                    Systems: A Material-UI and Shadcn Perspective
+                </h1>
+                <div>
+                    <p class="datetime">
+                        <span>31.01.2024</span>
+                        <span>23:45</span>
+                    </p>
+                </div>
+            </header>
+            <main>
+                <slot name="content" />
+            </main>
+            <div>
+                Read more at <a href="http://localhost:4321">ueuie.dev</a>
+            </div>
+        </div>
+        <Button class="tts">
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+            >
+                <path
+                    d="M12 4V20M8 9V15M20 10V14M4 10V14M16 7V17"
+                    stroke="white"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"></path>
+            </svg>
+        </Button>
+    </div>
+</Basic>
+
+<script>
+    import { animate } from '~/components/Logo.anim';
+
+    animate.line(0, 'THE', 15);
+    animate.line(1, 'x', 25);
+    animate.line(2, '[B]LOG', 15);
+</script>

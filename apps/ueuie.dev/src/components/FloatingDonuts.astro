@@ -1,0 +1,44 @@
+---
+import Donut from './Donut.astro';
+---
+
+<style lang="scss">
+    .container {
+        position: relative;
+        z-index: -1;
+        width: 100vw;
+        height: 100vh;
+
+        display: block;
+
+        > pre {
+            z-index: -2;
+            scale: 2.5;
+        }
+    }
+
+    .backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        z-index: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.347);
+        backdrop-filter: blur(10px);
+    }
+</style>
+
+<div class="container">
+    <div class="backdrop"></div>
+    <Donut
+        class:list={['donut']}
+        style={{
+            left: '40%',
+            top: '-20%',
+            rotate: '180deg',
+        }}
+    />
+    <Donut style={{ left: '2rem', bottom: '-2rem', rotate: '-116.22deg' }} />
+    <Donut style={{ right: '-5rem', bottom: '4rem', rotate: '130.94deg' }} />
+</div>

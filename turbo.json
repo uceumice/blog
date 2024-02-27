@@ -1,0 +1,54 @@
+{
+    "$schema": "https://turbo.build/schema.json",
+    "pipeline": {
+        "build": {
+            "inputs": [
+                "src/**/*",
+                "*.json",
+                "*.js",
+                "*.ts"
+            ],
+            "dependsOn": [
+                "^build"
+            ]
+        },
+        "check": {
+            "cache": false
+        },
+        "dev": {
+            "cache": false,
+            "persistent": true
+        },
+        "@ueuie.dev/collection#build": {
+            "outputs": [
+                "build"
+            ]
+        },
+        "@ueuie.dev/movno#build": {
+            "outputs": [
+                "build"
+            ]
+        },
+        "@ueuie.dev/path#build": {
+            "outputs": [
+                "build"
+            ]
+        },
+        "kompas": {
+            "outputs": [
+                "dist"
+            ]
+        },
+        "portal": {
+            "outputs": [
+                "other"
+            ]
+        },
+        "qwik": {
+            "outputs": [
+                "server",
+                "dist"
+            ]
+        }
+    }
+}

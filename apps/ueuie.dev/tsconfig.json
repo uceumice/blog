@@ -1,0 +1,22 @@
+{
+  "extends": "astro/tsconfigs/strictest",
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "strictNullChecks": true,
+    "allowJs": true,
+    "baseUrl": "./src",
+    "types": [
+      "@cloudflare/workers-types"
+    ],
+    "paths": {
+      "~/*": [
+        "./*"
+      ]
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ],
+}

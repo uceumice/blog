@@ -1,0 +1,59 @@
+---
+import Logo from '~/components/Logo.astro';
+import Intro from '~/components/Intro.astro';
+import Socials from '~/components/Socials.astro';
+import FloatingDonuts from '~/components/FloatingDonuts.astro';
+import Basic from '~/components/layouts/Basic.astro';
+---
+
+<style lang="scss">
+    $padding: 12rem;
+
+    .container {
+        position: relative;
+        padding: $padding;
+
+        width: calc(100% - 2 * $padding);
+        height: calc(100% - 2 * $padding);
+
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        justify-content: space-between;
+
+        z-index: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+        $padding-x: 4rem;
+        $padding-y: 16rem;
+
+        .container {
+            padding: $padding-y $padding-x;
+
+            width: calc(100% - 2 * $padding-x);
+            height: calc(100% - 2 * $padding-y);
+
+            text-align: center;
+            align-items: center;
+        }
+    }
+</style>
+
+<Basic>
+    <Logo slot="logo" teletype={{ lines: ['WELCOME', 'TO', '[B]LOG'] }} />
+    <div class="container">
+        <Intro />
+        <Socials />
+    </div>
+    <FloatingDonuts />
+</Basic>
+<div class=""></div>
+
+<script>
+    import { animate } from '~/components/Logo.anim';
+
+    animate.line(0, 'WELCOME', 15);
+    animate.line(1, 'TO', 35);
+    animate.line(2, '[B]LOG', 15);
+</script>

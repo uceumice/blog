@@ -1,0 +1,79 @@
+---
+// style reset
+import 'normalize.css/normalize.css';
+---
+
+<style is:global lang="scss">
+    :root {
+        --background-color: lch(0% 0 0);
+        --text-color: lch(99.9% 0 0);
+
+        ::selection {
+            color: #000;
+            background: #fff;
+        }
+
+        ::-moz-selection {
+            color: #000;
+            background: #fff;
+        }
+    }
+
+    html {
+        background-color: var(--background-color);
+        color: var(--text-color);
+
+        font-family: monospace;
+    }
+
+    html,
+    body {
+        width: 100%;
+        height: 100%;
+    }
+</style>
+
+<style>
+    .container {
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        position: relative;
+    }
+</style>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link rel="icon" type="image/ico" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="generator" content={Astro.generator} />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="32x32"
+            href="/favicon-32x32.png"
+        />
+        <link
+            rel="icon"
+            type="image/png"
+            sizes="16x16"
+            href="/favicon-16x16.png"
+        />
+        <link
+            rel="alternate"
+            type="application/rss+xml"
+            title="[B]Log RSS Feed"
+            href="rss.xml"
+        />
+        <title>[B]LOG - By Alex</title>
+    </head>
+    <html>
+        <header>
+            <slot name="logo" />
+        </header>
+        <div class="container">
+            <slot />
+        </div>
+    </html>
+</html>
