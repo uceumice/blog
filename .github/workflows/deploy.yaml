@@ -1,0 +1,86 @@
+name: '🗐 Blog: Build static Astro site and deploy to Cloudflare Pages ᓚᘏᗢ'
+
+on:
+    push:
+        branches:
+            - main
+        paths:
+            - '.github/workflows/deploy.yaml'
+            - 'apps/ueuie.dev/**'
+            - 'pnpm-lock.yaml'
+            - 'package.json'
+            - 'turbo.json'
+            - '!.eslintignore'
+            - '!.eslintcache'
+            - '!.eslintrc.json'
+            - '!.prettierignore'
+            - '!.prettierrc.json'
+    workflow_dispatch:
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        environment: execution
+        permissions:
+            contents: read
+            deployments: write
+        name: ✨ Build Astro Project
+        steps:
+            - name: ⬇️ Checkout
+              uses: actions/checkout@v3
+
+            - name: ⎔ Setup node
+              uses: actions/setup-node@v3
+
+            # ----
+            - name: ⎔ Setup pnpm
+              uses: pnpm/action-setup@v2
+              id: pnpm-install
+              with:
+                  version: 7
+                  run_install: false
+
+            - name: 💫 Include pnpm cache (store)
+              id: pnpm-cache
+              shell: bash
+              run: |
+                  echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+            - uses: actions/cache@v3
+              name: setup `pnpm` cache
+              with:
+                  path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+                  key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+                  restore-keys: |
+                      ${{ runner.os }}-pnpm-store-
+
+            - uses: actions/cache@v3
+              name: setup `build` cache
+              with:
+                  path: ./apps/web/blog.ueuie.dev/dist
+                  key: ${{ runner.os }}-astro-build-${{ hashFiles('dist') }}
+                  restore-keys: |
+                      ${{ runner.os }}-astro-build-
+            # ----
+            - name: 📥 Install dependencies
+              run: pnpm install
+
+            - name: 🖇 Build application
+              run: pnpm run build --filter @ueuie.dev/blog
+
+            - name: ⛈️ Publish to Cloudflare Pages
+              uses: cloudflare/pages-action@v1
+              with:
+                  apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+                  accountId: ceea9c8b1ca43a60e40bbeaa6b96e594
+                  projectName: blog
+                  directory: dist
+                  # Optional: Enable this if you want to have GitHub Deployments triggered
+                  gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+                  # Optional: Switch what branch you are publishing to.
+                  # By default this will be the branch which triggered this workflow
+                  branch: main
+                  # Optional: Change the working directory
+                  workingDirectory: apps/ueuie.dev
+                  # Optional: Change the Wrangler version, allows you to point to a specific version or a tag such as `beta`
+                  wranglerVersion: '3'
