@@ -8,7 +8,6 @@
     "start": "astro dev",
     "build": "astro check && astro build",
     "preview": "wrangler pages dev ./dist --local",
-    "publish": "wrangler pages deploy ./dist --project-name blog",
     "astro": "astro"
   },
   "dependencies": {
