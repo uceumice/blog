@@ -11,9 +11,25 @@ import Donut from './Donut.astro';
 
         display: block;
 
-        > pre {
+        pre {
             z-index: -2;
             scale: 2.5;
+        }
+
+        :nth-child(0) {
+            left: 2rem;
+            bottom: -2rem;
+            rotate: -116.22deg;
+        }
+        :nth-child(1) {
+            left: 40%;
+            top: -20%;
+            rotate: 180deg;
+        }
+        :nth-child(2) {
+            right: -5rem;
+            bottom: 4rem;
+            rotate: 130.94deg;
         }
     }
 
@@ -33,19 +49,20 @@ import Donut from './Donut.astro';
             backdrop-filter: none;
             background-color: rgba(0, 0, 0, 0.8);
         }
+
+        .container {
+            pre:nth-child(2) {
+                right: -5rem;
+                bottom: 20rem;
+                rotate: 130.94deg;
+            }
+        }
     }
 </style>
 
 <div class="container">
+    <Donut />
+    <Donut />
+    <Donut />
     <div class="backdrop"></div>
-    <Donut
-        class:list={['donut']}
-        style={{
-            left: '40%',
-            top: '-20%',
-            rotate: '180deg',
-        }}
-    />
-    <Donut style={{ left: '2rem', bottom: '-2rem', rotate: '-116.22deg' }} />
-    <Donut style={{ right: '-5rem', bottom: '4rem', rotate: '130.94deg' }} />
 </div>
