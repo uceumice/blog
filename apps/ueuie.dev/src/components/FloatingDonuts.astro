@@ -24,8 +24,14 @@ import Donut from './Donut.astro';
         z-index: 0;
         width: 100%;
         height: 100%;
-        background-color: rgba(0, 0, 0, 0.347);
+        background-color: rgba(0, 0, 0, 0.05);
         backdrop-filter: blur(10px);
+    }
+
+    @media screen and (max-width: 768px) {
+        .backdrop {
+            background-color: rgba(0, 0, 0, 0.8);
+        }
     }
 </style>
 
