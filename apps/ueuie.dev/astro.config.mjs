@@ -3,8 +3,6 @@ import cloudflare from '@astrojs/cloudflare';
 import partytown from '@astrojs/partytown';
 import mdx from '@astrojs/mdx';
 
-import solidJs from '@astrojs/solid-js';
-
 // https://astro.build/config
 export default defineConfig({
   site: 'https://www.ueuie.dev',
@@ -16,7 +14,7 @@ export default defineConfig({
       type: 'pages',
     }
   }),
-  integrations: [partytown(), mdx(), solidJs()],
+  integrations: [partytown(), mdx()],
   cacheDir: '.astro',
   experimental: {
     contentCollectionCache: true
