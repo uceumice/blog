@@ -3,12 +3,17 @@ import type { HTMLAttributes } from 'astro/types';
 
 type Props = HTMLAttributes<'a'> & {
     tooltip?: string;
-    size?: 'sm-rect' | 'md-rect' | 'lg-rect';
+    size?: 'sm' | 'md' | 'lg';
 };
-const { tooltip, size = 'md-rect', ...props } = Astro.props;
+const { tooltip, size = 'lg', ...props } = Astro.props;
 ---
 
-<style lang="scss" define:vars={{ sw: size === 'sm-rect' ? '1rem' : '1.5rem' }}>
+<style
+    lang="scss"
+    define:vars={{
+        sw: size === 'sm' ? '1rem' : size === 'md' ? '1.25rem' : '1.5rem',
+    }}
+>
     a {
         all: unset;
         color: #fff;

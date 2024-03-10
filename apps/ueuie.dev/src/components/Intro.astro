@@ -1,9 +1,3 @@
----
-import Designing from '~/components/Designing.astro';
-import Improving from '~/components/Improving.astro';
-import Securing from '~/components/Securing.astro';
----
-
 <style lang="scss">
     .container {
         font-variant: small-caps;
@@ -12,25 +6,26 @@ import Securing from '~/components/Securing.astro';
         max-width: 100%;
         width: 30rem;
 
-        .greeting {
+        .greet {
             margin: 0;
             font-size: 4.5rem;
         }
     }
 
-    .further-on-current {
+    .about {
         position: relative;
-        text-align: justify;
         margin-top: 4rem;
         font-size: 1.5rem;
+
+        text-align: justify;
     }
 </style>
 
 <div class="container">
-    <h1 class="greeting">hey - i am alex</h1>
-    <p class="further-on-current">
-        cyber security student, software developer and design enthusiast. right
-        now i am awaiting placement for the winter semester at the university of
-        bonn. my passion lies in <Designing />, <Securing />, and <Improving />.
+    <h1 class="greet">
+        <slot name="title" />
+    </h1>
+    <p class="about">
+        <slot name="about" />
     </p>
 </div>

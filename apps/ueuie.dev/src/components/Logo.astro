@@ -1,27 +1,26 @@
----
-import type { HTMLAttributes } from 'astro/types';
-import type { Lines } from './Logo.anim';
+<style lang="scss">
+    .container {
+        position: fixed;
+        display: flex;
 
-type Props = {
-    teletype?: {
-        lines?: Lines;
-    };
+        top: 2.5rem;
+        left: 2.5rem;
 
-    style?: Exclude<HTMLAttributes<'div'>['style'], string>;
-};
+        gap: 0.5rem;
+        flex-shrink: 0;
+        align-items: flex-start;
 
-const { teletype, style } = Astro.props;
-import 'normalize.css/normalize.css';
----
+        z-index: 10;
 
-<div
-    class="container"
-    style={{
-        left: '2.5rem',
-        top: '2.5rem',
-        ...style,
-    }}
->
+        // LogoIcon
+        .icon {
+            width: 3rem;
+            height: 3rem;
+        }
+    }
+</style>
+
+<div class="container">
     <svg
         xmlns="http://www.w3.org/2000/svg"
         width="48"
@@ -47,54 +46,5 @@ import 'normalize.css/normalize.css';
             </linearGradient>
         </defs>
     </svg>
-    <ul id="teletype" class="teletype">
-        {
-            (teletype?.lines
-                ? [
-                      teletype.lines[0] ?? '',
-                      teletype.lines[1] ?? '',
-                      teletype.lines[2] ?? '',
-                  ]
-                : ['', '', '']
-            ).map((line) => <li class="line">{line}</li>)
-        }
-    </ul>
+    <slot />
 </div>
-
-<style lang="scss">
-    .container {
-        position: fixed;
-
-        gap: 0.5rem;
-        display: flex;
-        flex-shrink: 0;
-        align-items: flex-start;
-
-        z-index: 10;
-
-        // LogoIcon
-        .icon {
-            width: 3rem;
-            height: 3rem;
-        }
-
-        .teletype {
-            align-self: stretch;
-            list-style: none;
-            margin: 0;
-            padding: 0;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: flex-start;
-
-            .line {
-                font-family: monospace;
-                font-size: 0.75rem;
-                font-weight: 200;
-                line-height: normal;
-            }
-        }
-    }
-</style>

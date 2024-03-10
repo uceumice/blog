@@ -1,7 +1,7 @@
 ---
 import Link from './atoms/Link.astro';
 
-const linkTargetPrefix = 'from-[b]log-by-uceumice-';
+const linkTargetPrefix = 'RZ58Q0B4HQ-';
 ---
 
 <style lang="scss">
@@ -28,7 +28,7 @@ const linkTargetPrefix = 'from-[b]log-by-uceumice-';
     <Link
         href="https://github.com/uceumice"
         target={linkTargetPrefix + 'github'}
-        tooltip="Check out my GitHub"
+        tooltip="check out my GitHub"
     >
         <svg
             width="24"
@@ -56,7 +56,7 @@ const linkTargetPrefix = 'from-[b]log-by-uceumice-';
     <Link
         href="https://www.behance.net/uceumice"
         target={linkTargetPrefix + 'behance'}
-        tooltip="Look around my Behance"
+        tooltip="check out my Behance"
     >
         <svg
             width="24"
@@ -75,7 +75,7 @@ const linkTargetPrefix = 'from-[b]log-by-uceumice-';
     <Link
         href="https://medium.com/@uceumice"
         target={linkTargetPrefix + 'medium'}
-        tooltip="Skim through my Medium"
+        tooltip="skim through my articles on Medium"
     >
         <svg
             width="24"
@@ -92,9 +92,9 @@ const linkTargetPrefix = 'from-[b]log-by-uceumice-';
 
     <!-- RSS -->
     <Link
-        href="/rss.xml"
+        href={`/rss.xml`}
         target={linkTargetPrefix + 'rss'}
-        tooltip="Stay updated by my RSS feed"
+        tooltip="subscribe to my RSS feed to stay in touch"
     >
         <svg
             width="24"

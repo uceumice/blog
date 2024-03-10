@@ -1,19 +1,27 @@
 ---
 import type { HTMLAttributes } from 'astro/types';
 
-type Props = HTMLAttributes<'button'> & { tooltip?: string; href?: string };
-const { tooltip, ...props } = Astro.props;
+type Props = HTMLAttributes<'button'> & {
+    tooltip?: string;
+    size?: 'sm' | 'md' | 'lg';
+};
+const { tooltip, size = 'lg', ...props } = Astro.props;
 
 export type ButtonProps = Props;
 ---
 
-<style>
+<style
+    define:vars={{
+        size: size === 'sm' ? '1rem' : size === 'md' ? '1.25rem' : '1.5rem',
+    }}
+>
     button {
         all: unset;
         color: #fff;
 
-        width: 1rem;
-        height: 1rem;
+        width: var(--size);
+        height: var(--size);
+
         cursor: pointer;
         transition: transform 150ms ease-in-out;
     }
@@ -32,21 +40,26 @@ export type ButtonProps = Props;
     .tooltip-text {
         visibility: hidden;
         position: absolute;
-        width: 120px;
-        background-color: #555;
+        width: min-content;
+        background-color: #000000;
         color: #fff;
-        text-align: center;
-        padding: 5px 0;
-        border-radius: 6px;
+        text-align: left;
+        padding: 0.5rem 1rem;
         z-index: 1;
         opacity: 0;
-        transition: opacity 0.6s;
+        text-wrap: nowrap;
+        transition: opacity ease-in-out 0.6s;
+    }
+
+    button:hover .tooltip-text {
+        visibility: visible;
+        opacity: 1;
     }
 
     .tooltip-top {
-        bottom: 125%;
-        left: 50%;
-        margin-left: -60px;
+        bottom: 150%;
+        // left: 50%;
+        margin-left: -1rem;
     }
 </style>
 

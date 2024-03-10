@@ -1,6 +1,8 @@
 ---
-// style reset
 import 'normalize.css/normalize.css';
+
+type Props = { title: string };
+const { title } = Astro.props;
 ---
 
 <style is:global lang="scss">
@@ -66,14 +68,18 @@ import 'normalize.css/normalize.css';
             title="[B]Log RSS Feed"
             href="rss.xml"
         />
-        <title>[B]LOG - By Alex</title>
+        <title>{title}</title>
+        <slot name="head" />
     </head>
-    <html>
+    <body>
         <header>
-            <slot name="logo" />
+            <slot name="header" />
         </header>
         <div class="container">
             <slot />
         </div>
-    </html>
+        <footer>
+            <slot name="footer" />
+        </footer>
+    </body>
 </html>

@@ -1,0 +1,61 @@
+---
+import Layout from '~/components/LayoutBase.astro';
+
+import Intro from '~/components/Intro.astro';
+import Socials from '~/components/Socials.astro';
+
+import FloatingDonuts from '~/components/FloatingDonuts.astro';
+
+type Props = { title: string };
+const { title } = Astro.props;
+---
+
+<style lang="scss">
+    $padding: 12rem;
+
+    .container {
+        position: relative;
+        padding: $padding;
+
+        width: calc(100% - 2 * $padding);
+        height: calc(100% - 2 * $padding);
+
+        display: flex;
+        align-items: start;
+        flex-direction: column;
+        justify-content: space-between;
+
+        z-index: 1;
+    }
+
+    @media screen and (max-width: 768px) {
+        $padding-x: 4rem;
+        $padding-y: 16rem;
+
+        .container {
+            padding: $padding-y $padding-x;
+
+            width: calc(100% - 2 * $padding-x);
+            height: calc(100% - 2 * $padding-y);
+
+            text-align: center;
+            align-items: center;
+        }
+    }
+</style>
+
+<Layout title={title + ', Wellcome to [B]LOG'}>
+    <slot slot="header" name="logo" />
+
+    <div class="container">
+        <Intro>
+            <Fragment slot="title">
+                {title}
+            </Fragment>
+            <slot name="about" slot="about" />
+        </Intro>
+        <Socials />
+    </div>
+
+    <FloatingDonuts />
+</Layout>

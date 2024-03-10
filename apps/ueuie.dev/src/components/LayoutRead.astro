@@ -1,6 +1,6 @@
 ---
 import type { MarkdownHeading } from 'astro';
-import Basic from '~/components/layouts/Basic.astro';
+import Layout from '~/components/LayoutBase.astro';
 import Button from '~/components/atoms/Button.astro';
 import ReaderTools from '~/components/ReaderTools.astro';
 
@@ -61,7 +61,7 @@ const { headings } = Astro.props;
     }
 </style>
 
-<Basic>
+<Layout title="Read">
     <div class="container">
         <div class="sidebar">
             <div class="table-of-contents">
@@ -115,7 +115,7 @@ const { headings } = Astro.props;
             </svg>
         </Button>
     </div>
-</Basic>
+</Layout>
 
 <script>
     import { animate } from '~/components/Logo.anim';
