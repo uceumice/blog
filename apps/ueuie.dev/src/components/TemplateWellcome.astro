@@ -49,9 +49,7 @@ const { title } = Astro.props;
 
     <div class="container">
         <Intro>
-            <Fragment slot="title">
-                {title}
-            </Fragment>
+            <slot name="title" slot="title" />
             <slot name="about" slot="about" />
         </Intro>
         <Socials />
